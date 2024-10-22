@@ -54,10 +54,9 @@ void deque_print(const deque* d) {
         return;
     }
     printf("Дек: ");
-    int index = d->front;
-    for (int i = 0; i < d->size; i++) {
-        printf("%d ", d->data[index].value);
-        index = (index + 1) % MAX_DEQUE_SIZE;
+    while (!deque_is_empty(d)){
+        printf("%d ", deque_front_value(d));
+        deque_pop_front(d);
     }
     printf("\n");
 }
@@ -84,20 +83,17 @@ int deque_back_value(const deque* d) {
 }
 
 void deque_concat(deque* dest, deque* src) {
-    if (src->size == 0) {
+    if (deque_size(src) == 0) {
         return;
     }
-    if (dest->size + src->size > MAX_DEQUE_SIZE) {
+    if (deque_size(dest) + deque_size(src) > MAX_DEQUE_SIZE) {
         printf("Ошибка: недостаточно места для конкатенации деков\n");
         exit(EXIT_FAILURE);
     }
-    // Копируем элементы из src в dest
-    int index = src->front;
-    for (int i = 0; i < src->size; i++) {
-        int value = src->data[index].value;
+    // Перемещаем элементы из src в dest
+    while (!deque_is_empty(src)) {
+        int value = deque_front_value(src);
+        deque_pop_front(src);
         deque_push_back(dest, value);
-        index = (index + 1) % MAX_DEQUE_SIZE;
     }
-    // Очищаем src
-    deque_create(src);
 }

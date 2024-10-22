@@ -28,6 +28,7 @@ void deque_print(const deque* d);
 int deque_size(const deque* d);
 int deque_front_value(const deque* d);
 int deque_back_value(const deque* d);
+
 void deque_concat(deque* dest, deque* src);
 
 #endif

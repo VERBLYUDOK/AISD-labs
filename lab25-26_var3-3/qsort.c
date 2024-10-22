@@ -6,9 +6,7 @@ void quicksort_deque(deque* d) {
     }
 
     // Выбираем опорный элемент
-    int pivot_index = rand() % d->size;
-    int index = (d->front + pivot_index) % MAX_DEQUE_SIZE;
-    int pivot = d->data[index].value;
+    int pivot = deque_front_value(d);
 
     // Создаем 3 дека
     deque less, equal, greater;
